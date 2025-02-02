@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material'
 
 export default function () {
   return (
-    <div>
+    <div >
         <Box sx={{backgroundColor:'#F8F8F8'}}>
       <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', paddingTop: '50px' }}>
         All Products
