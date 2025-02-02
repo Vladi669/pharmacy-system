@@ -72,6 +72,10 @@ function ResponsiveAppBar() {
       >
         <Toolbar disableGutters>
           {/* Logo for both desktop and mobile */}
+          <Button
+           href="/">
+
+       
           <Box
             component="img"
             sx={{
@@ -83,6 +87,7 @@ function ResponsiveAppBar() {
             alt="Logo"
             src="/logo.png"
           />
+             </Button>
           <Typography
             variant="h6"
             noWrap

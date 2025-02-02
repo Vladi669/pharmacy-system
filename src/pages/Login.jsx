@@ -23,7 +23,7 @@ const Login = () => {
             backgroundImage: `url(${process.env.PUBLIC_URL}/login.jpg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height:'100vh'
+            height: '100vh'
         }}>
 
 
@@ -65,6 +65,8 @@ const Login = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             sx={{
+    
+                            
                                 '& label.Mui-focused': {
                                     color: '#3f51b5', // Change label color on focus
                                 },

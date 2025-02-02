@@ -18,13 +18,15 @@ const Home = () => {
           backgroundPosition: 'center',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
+          
+
           alignItems: 'center',
           padding: 4,
           textAlign: 'center',
         }}
       >
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom
+        sx={{pt:20}}>
           Welcome to the Pharmacy System
         </Typography>
         <Typography variant="body1">
