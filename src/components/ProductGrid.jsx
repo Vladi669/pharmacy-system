@@ -2,10 +2,10 @@ import React from 'react';
 import { Grid, Card, CardContent, CardMedia, Typography, Button, Container } from '@mui/material';
 
 const products = [
-  { id: 1, name: 'Aspirin', description: 'Pain reliever and fever reducer', image: 'https://sopharmacy.bg/media/sys_master/hc1/h0f/9044406796318.jpg' },
-  { id: 2, name: 'Paracetamol', description: 'Used to treat pain and fever', image: 'https://sopharmacy.bg/media/sys_master/h9e/h63/8912501964830.jpg' },
-  { id: 3, name: 'Ibuprofen', description: 'Nonsteroidal anti-inflammatory drug', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Ibuprofen_pills.jpg/1280px-Ibuprofen_pills.jpg' },
-  { id: 4, name: 'Antibiotic Cream', description: 'Used to treat minor cuts and burns', image: 'https://upload.wikimedia.org/wikipedia/commons/7/7d/Antibiotic_ointment.jpg' },
+  { id: 1, name: 'Aspirin', description: 'Pain reliever and fever reducer', image: '/products/Aspirin.webp' },
+  { id: 2, name: 'Paracetamol', description: 'Used to treat pain and fever', image: '/products/Aspirin.webp' },
+  { id: 3, name: 'Ibuprofen', description: 'Nonsteroidal anti-inflammatory drug', image: '/products/Aspirin.webp' },
+  { id: 4, name: 'Antibiotic Cream', description: 'Used to treat minor cuts and burns', image: '/products/Aspirin.webp' },
   { id: 5, name: 'Cough Syrup', description: 'Used to treat coughing and related symptoms', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Cough_syrup.jpg/800px-Cough_syrup.jpg' },
   { id: 6, name: 'Vitamins', description: 'Daily supplement for better health', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Multivitamins_tablets_and_softgels.jpg/800px-Multivitamins_tablets_and_softgels.jpg' },
   { id: 7, name: 'Band-Aids', description: 'For covering and protecting wounds', image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Adhesive_bandage.jpg/800px-Adhesive_bandage.jpg' },

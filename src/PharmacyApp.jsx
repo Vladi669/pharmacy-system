@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Home from './pages/Home'; // Import the new Home component
 import Login from './pages/Login'; // Import the Login component

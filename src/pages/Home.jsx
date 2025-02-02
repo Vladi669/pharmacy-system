@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Box
         sx={{
-          width: '100%',
+          maxWidth: '100vw',
           minHeight: '700px',
           color: 'white',
           backgroundImage: `url(${process.env.PUBLIC_URL}/background.jpg)`,
@@ -21,6 +21,7 @@ const Home = () => {
           justifyContent: 'center',
           alignItems: 'center',
           padding: 4,
+          textAlign: 'center',
         }}
       >
         <Typography variant="h4" gutterBottom>

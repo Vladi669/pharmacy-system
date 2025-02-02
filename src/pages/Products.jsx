@@ -7,7 +7,7 @@ export default function () {
     <div>
         <Box sx={{backgroundColor:'#F8F8F8'}}>
       <Typography variant="h4" gutterBottom sx={{ textAlign: 'center', paddingTop: '50px' }}>
-        Latest Products
+        All Products
       </Typography>
       <ProductGrid />
       </Box>
