@@ -14,14 +14,54 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 
-const pages = ['Products'];
+const pages = [
+  { name: 'Products', link: '/products' },
+  { name: 'Add Product', link: '/addProduct' },
+  { name: 'Edit Products', link: '/productLists' },
+];
 
 function ResponsiveAppBar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [token, setToken] = React.useState(localStorage.getItem('token')); // Initial state from localStorage
+  const [isAdmin, setIsAdmin] = React.useState(localStorage.getItem('isAdmin') === 'true'); // Check if isAdmin is 'true' in localStorage
+  const [name, setName] = React.useState(localStorage.getItem('name')); // Initial state from localStorage
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  React.useEffect(() => {
+    const tokenFromStorage = localStorage.getItem('token');
+
+    if (tokenFromStorage !== 'empty') {
+      setToken(tokenFromStorage);
+    } else {
+      setToken(null);
+    }
+
+    const handleStorageChange = () => {
+      const updatedToken = localStorage.getItem('token');
+      setToken(updatedToken);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    localStorage.setItem('name', "");
+    setToken(null);
+    window.location.href = '/';
+  };
+
+  // Filter pages based on isAdmin status
+  const visiblePages = isAdmin
+    ? pages // Show all pages if the user is admin
+    : pages.filter((page) => page.name === 'Products'); // Show only the Products page if not admin
 
   const drawer = (
     <Box
@@ -31,28 +71,27 @@ function ResponsiveAppBar() {
       onKeyDown={handleDrawerToggle}
     >
       <List>
-        <ListItem disablePadding style={{ textAlign: 'center', paddingLeft: '70px', paddingTop: '10px',paddingBottom:'20px' }}>
-          CATEGORES
+        <ListItem disablePadding style={{ textAlign: 'center', paddingLeft: '70px', paddingTop: '10px', paddingBottom: '20px' }}>
+          CATEGORIES
         </ListItem>
-        {pages.map((page) => (
+        {visiblePages.map((page) => (
           <ListItem
-            key={page}
+            key={page.name}
             disablePadding
             sx={{
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)', // Add shadow here
-              borderRadius: '8px', // Optional: make the corners rounded
-              mb: 1, // Optional: add margin between items
-              transition: 'box-shadow 0.3s ease', // Optional: smooth transition for hover effect
+              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.2)',
+              borderRadius: '8px',
+              mb: 1,
+              transition: 'box-shadow 0.3s ease',
               '&:hover': {
-                boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)', // Optional: add a stronger shadow on hover
+                boxShadow: '0px 8px 15px rgba(0, 0, 0, 0.3)',
               }
             }}
           >
-            <ListItemButton href={`/${page.toLowerCase()}`}>
-              <ListItemText primary={page} />
+            <ListItemButton href={page.link}>
+              <ListItemText primary={page.name} />
             </ListItemButton>
           </ListItem>
-
         ))}
       </List>
     </Box>
@@ -61,33 +100,29 @@ function ResponsiveAppBar() {
   return (
     <>
       <AppBar
-        position="sticky" // Make the AppBar sticky
+        position="sticky"
         sx={{
           pr: 5,
           pl: 5,
-          opacity: 0.9, // Adjust the opacity here
-          backgroundColor: 'rgba(0, 0, 0, 0.8)', // Optional: add a semi-transparent background color
-          transition: 'opacity 0.3s ease-in-out', // Optional: smooth transition effect for opacity
+          opacity: 0.9,
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          transition: 'opacity 0.3s ease-in-out',
         }}
       >
         <Toolbar disableGutters>
-          {/* Logo for both desktop and mobile */}
-          <Button
-           href="/">
-
-       
-          <Box
-            component="img"
-            sx={{
-              display: 'flex',
-              mr: 1,
-              width: 40,
-              height: 40,
-            }}
-            alt="Logo"
-            src="/logo.png"
-          />
-             </Button>
+          <Button href="/">
+            <Box
+              component="img"
+              sx={{
+                display: 'flex',
+                mr: 1,
+                width: 50,
+                height: 50,
+              }}
+              alt="Logo"
+              src="/logo.png"
+            />
+          </Button>
           <Typography
             variant="h6"
             noWrap
@@ -95,7 +130,7 @@ function ResponsiveAppBar() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' }, // Only show on desktop
+              display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -106,7 +141,6 @@ function ResponsiveAppBar() {
             PHARMACY
           </Typography>
 
-          {/* Drawer toggle button for mobile */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -118,50 +152,64 @@ function ResponsiveAppBar() {
             </IconButton>
           </Box>
 
-
-          {/* Menu buttons for desktop */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-  {pages.map((page) => (
-    <Button
-      key={page}
-      href={`/${page.toLowerCase()}`}
-      sx={{
-        my: 2,
-        color: 'white',
-        backgroundColor: 'rgba(255, 255, 255, 0.1)', // Subtle background color
-        padding: '10px 20px', // Increase padding for better visibility
-        fontWeight: 'bold', // Make the font bolder
-        borderRadius: '8px', // Rounded corners for a modern look
-        transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth hover transitions
-        '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.3)', // Change background on hover
-          transform: 'scale(1.05)', // Slight scaling on hover
-        }
-      }}
-    >
-      {page}
-    </Button>
-  ))}
-</Box>
-
+            {visiblePages.map((page) => (
+              <Button
+                key={page.name}
+                href={page.link}
+                sx={{
+                  my: 2,
+                  color: 'white',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  padding: '10px 20px',
+                  fontWeight: 'bold',
+                  borderRadius: '8px',
+                  marginRight: 2,
+                  transition: 'background-color 0.3s ease, transform 0.2s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+                    transform: 'scale(1.05)',
+                  }
+                }}
+              >
+                {page.name}
+              </Button>
+            ))}
+          </Box>
 
           <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
-            <Button
-              sx={{ ml: 2, color: 'white', display: 'block' }}
-              href="/login"
-            >
-              Login
-            </Button>
+            {token ? (
+              <Button
+                sx={{
+                  mr: 2, fontSize: 16, color: 'white', backgroundColor: '#0d8e9d', '&:hover': {
+                    backgroundColor: '#14b5c5',
+                  },
+                }}
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                sx={{
+                  mr: 2, fontSize: 16, color: 'white', backgroundColor: '#0d8e9d', '&:hover': {
+                    backgroundColor: '#14b5c5',
+                  },
+                }}
+                href="/login"
+              >
+                Login
+              </Button>
+            )}
             <Tooltip title="User Profile">
               <IconButton sx={{ p: 0 }}>
-                <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" sx={name ? { bgcolor: 'orange' } : {}} >{name.charAt(0).toUpperCase()}</Avatar>
               </IconButton>
             </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Drawer for mobile menu */}
       <Drawer
         anchor="left"
         open={mobileOpen}
@@ -175,3 +223,4 @@ function ResponsiveAppBar() {
 }
 
 export default ResponsiveAppBar;
+

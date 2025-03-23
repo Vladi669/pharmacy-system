@@ -4,9 +4,7 @@ import PharmacyApp from './PharmacyApp';
 
 function App() {
   return (
-   <div>
     <PharmacyApp/>
-   </div>
   );
 }
 
