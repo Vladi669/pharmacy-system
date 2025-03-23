@@ -203,7 +203,7 @@ function ResponsiveAppBar() {
             )}
             <Tooltip title="User Profile">
               <IconButton sx={{ p: 0 }}>
-                <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" sx={name ? { bgcolor: 'orange' } : {}} >{name.charAt(0).toUpperCase()}</Avatar>
+                <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" sx={name ? { bgcolor: 'orange' } : {}} >A</Avatar>
               </IconButton>
             </Tooltip>
           </Box>
