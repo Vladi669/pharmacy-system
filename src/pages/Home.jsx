@@ -112,7 +112,7 @@ const Home = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </Box>
-      {!loading && <ProductGrid products={products} />}
+     <ProductGrid products={products} />
       </Box>
       <Footer/>
 
